@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
 		m_Velocity.x = dir.x * speed;
 		m_Velocity.z = dir.z * speed;
 
-
 		if (m_CharacterController.isGrounded)
 		{
 			m_Velocity.y = -0.5f; // small force so the character controller will ditect is grounded
@@ -104,9 +103,7 @@ public class PlayerController : MonoBehaviour
 				m_Velocity.y = Mathf.Sqrt(-2 * m_Gravity * m_JumpHeight);
 		}
 		else
-		{
 			m_Velocity.y += m_Gravity * Time.deltaTime;
-		}
 
 		m_CharacterController.Move(m_Velocity * Time.deltaTime);
 	}
@@ -128,8 +125,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (m_CurrentGun != null)
 		{
-			GameObject groundGun = Instantiate(GameManeger.Get().m_GroundGunPrefab);
-			groundGun.transform.position = dropPoint;
+			GameObject groundGun = Instantiate(GameManeger.Get().m_GroundGunPrefab, dropPoint, transform.rotation);
 			groundGun.GetComponent<GroundGun>().m_Data = m_CurrentGun;
 		}
 
